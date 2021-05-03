@@ -35,7 +35,7 @@ export class DetailOfDeck extends Component {
           </TextButton>
           <TextButton  style={[styles.btn]}
             onPress={() =>
-              this.props.navigation.navigate("Quiz", { title: deck.title })
+              this.props.navigation.navigate("Quiz", { dec: deck })
             }
           >
             Start Quiz

@@ -12,6 +12,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import DetailOfDeck from './components/DetailOfDeck';
 import AddCard from './components/AddCard';
+import Quiz from './components/Quiz';
 import thunk from 'redux-thunk';
 const store = createStore(reducer, applyMiddleware(thunk,logger));
 
@@ -53,7 +54,14 @@ export default class App extends React.Component {
           navigationOptions: {
             title: 'add a new card'
           }
+        },
+        Quiz:{
+          screen: Quiz,
+          navigationOptions: {
+            title: 'add a new card'
+          }
         }
+
       }
     )
 
