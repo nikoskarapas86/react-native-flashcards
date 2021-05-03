@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { gray, green, white, red } from "../utils/colors";
+import { gray, white, red } from "../utils/colors";
 import { connect } from "react-redux";
 import TextButton from "./TextButton";
-
+import {removeThatDeck} from '../utils/DATA'
+import { removeDeck } from "../actions/index";
 export class DetailOfDeck extends Component {
   shouldComponentUpdate(nextProps) {
     return nextProps.deck !== undefined;
@@ -11,8 +12,8 @@ export class DetailOfDeck extends Component {
   handleDelete = (id) => {
     const { removeDeck, navigation } = this.props;
 
-    // removeDeck(id);
-    // removeDeckAS(id);
+     removeDeck(id);
+     removeThatDeck(id);
 
     navigation.goBack();
   };
@@ -42,6 +43,13 @@ export class DetailOfDeck extends Component {
           >
             Start Quiz
           </TextButton>
+
+          <TextButton
+          txtStyle={{ color: red }}
+          onPress={() => this.handleDelete(deck.title)}
+        >
+          Delete Deck
+        </TextButton>
         </View>
       </View>
     );
@@ -88,6 +96,6 @@ const mapStateToProps = (dec, { navigation }) => {
 };
 
 export default connect(
-  mapStateToProps
-  // { removeDeck }
+  mapStateToProps,
+  { removeDeck }
 )(DetailOfDeck);

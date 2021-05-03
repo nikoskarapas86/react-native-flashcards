@@ -66,7 +66,7 @@ export class AddCard extends Component {
             Submit
           </TextButton>
         </View>
-        <View style={{ height: "30%" }} />
+        <View style={{ height: "40%" }} />
       </View>
     );
   }
