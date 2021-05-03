@@ -5,19 +5,20 @@ import DeckList from "./components/DeckList";
 import AddDeck from "./components/AddDeck";
 import { createAppContainer } from "react-navigation";
 import { createMaterialTopTabNavigator } from "react-navigation-tabs";
-import { getDecks, loadInitialDecks } from "./utils/DATA";
+import {createStackNavigator} from 'react-navigation-stack';
+import { getDecks } from "./utils/DATA";
 import logger from "./middleware/logger";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import DetailOfDeck from './components/DetailOfDeck';
+import AddCard from './components/AddCard';
 import thunk from 'redux-thunk';
 const store = createStore(reducer, applyMiddleware(thunk,logger));
 
 export default class App extends React.Component {
  
 
-  componentDidMount() {
-    loadInitialDecks();
-  }
+  
 
   render() {
     const tabs = {
@@ -35,9 +36,32 @@ export default class App extends React.Component {
         },
       },
     };
+    const tabsNav = createMaterialTopTabNavigator(tabs);
+    const nav = createStackNavigator(
+      {
+        Home:{
+          screen:tabsNav
+        },
+        DetailOfDeck:{
+          screen: DetailOfDeck,
+          navigationOptions: {
+            title: 'Deck Details'
+          }
+        },
+        AddCard:{
+          screen: AddCard,
+          navigationOptions: {
+            title: 'add a new card'
+          }
+        }
+      }
+    )
 
-    const TabNav = createMaterialTopTabNavigator(tabs);
-    const TabsContainer = createAppContainer(TabNav);
+    
+
+
+
+    const TabsContainer = createAppContainer(nav);
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>

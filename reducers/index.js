@@ -5,7 +5,7 @@ import {
     ADD_CARD,
     RESET_STORE
   } from '../actions/index';
-  // import { decks as INITIAL_STATE } from '../utils/DATA';
+
   
   export default function decks(state = {}, action) {
     switch (action.type) {

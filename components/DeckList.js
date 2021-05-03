@@ -14,10 +14,11 @@ class DeckList extends Component {
 
     componentDidMount() {
         this.props.handleInitialData();
+        
       }
 
     render() {
-        const { decks } = this.props;
+        const { decks,navigation } = this.props;
         console.log(Object.values(decks))
         return (
             <ScrollView style={styles.container}>
@@ -25,12 +26,12 @@ class DeckList extends Component {
             {Object.values(decks).map(deck => {
               return (
                 <TouchableOpacity
-                  key={deck.key}
-                  onPress={() =>
-                    navigation.navigate('DeckDetail', { title: deck.title })
+                  key={deck.title}
+                  onPress={() => navigation.navigate('DetailOfDeck',{ dec: deck })
+                   
                   }
                 >
-                  <Deck deck={deck} />
+                  <Deck key={deck.key} deck={deck} />
                 </TouchableOpacity>
               );
             })}
