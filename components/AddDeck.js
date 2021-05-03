@@ -1,126 +1,96 @@
-import React, { Component } from 'react';
-
-import { white, purple,red } from "../utils/colors";
-import {
-    Text,
-    View,
-    ScrollView,
-    TextInput,
-    TouchableHighlight,
-    StyleSheet,
-} from 'react-native'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { white, purple, red } from "../utils/colors";
+import { addDeck } from "../actions/index";
+import { saveDeck } from "../utils/DATA";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
+import { Input } from "react-native-elements";
+import TextButton from "./TextButton";
 
 class AddDeck extends Component {
+  state = {
+    name: "",
+  };
 
-    state = {
-        deckName: '',
-    }
+  handleNameChange = (text) => {
+    this.setState({
+      name: text,
+    });
+  };
 
+  handleSubmit = () => {
+    const { addDeck, navigation } = this.props;
+    const { name } = this.state;
+    addDeck(name);
+    saveDeck(name);
+    navigation.goBack();
+  };
 
-    handleDeckNameInputChange = (newInput) => {
-        this.setState({
-            deckName: newInput
-        })
-    }
+  render() {
+    return (
+      <View>
+        <ScrollView>
+          <Text style={styles.header}>ADD DECK</Text>
+          <Text style={styles.subHead}>
+            What would be the title of your new deck?
+          </Text>
 
-    handleSubmit = () => {
-        const { handleNewDeckSubmition } = this.props.screenProps
-        const userInput = this.state.deckName
-
-        if (userInput) {
-            if (userInput === 'dateLatestAttempted') {
-                alert("dateLatestAttempted is a reserve word in this app, kindly use another Title for the Deck")
-            } 
-            else {
-                handleNewDeckSubmition(userInput.trim())
-                    .then((newDeck) => {
-                        this.setState({ deckName: '' })
-                        this.props.navigation.navigate('Deck', { deck: newDeck })
-                    })
-            }
-        }
-        else { alert("Deck name cannot be submitted empty!") }
-
-    }
-
-    render() {
-        return (
-            <View>
-            <ScrollView>
-            <Text style={styles.header}>
-                    ADD DECK
-                </Text>
-                <Text style={styles.subHead}>
-                    What would be the title of your new deck?
-                </Text>
-                {/* <TextInput
-                    value={this.state.deckName}
-                    onChangeText={this.handleDeckNameInputChange}
-                    style={styles.textbox}
-                /> */}
-
-                <View style={{
-                    alignItems: 'center',
-                }}>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={this.handleSubmit}
-                    >
-                        <Text style={styles.submit}>
-                            SUBMIT
-                    </Text>
-                    </TouchableHighlight>
-                </View>
-                </ScrollView>
-                </View>
-          
-               
-        
-        );
-    }
+          <View style={[styles.botm]}>
+            <Input
+              style={styles.input}
+              value={this.state.name}
+              onChangeText={this.handleNameChange}
+              placeholder="Question"
+            />
+          </View>
+          <View
+            style={{
+              alignItems: "center",
+            }}
+          >
+            <TextButton style={[styles.btn]} onPress={this.handleSubmit}>
+              Add Card
+            </TextButton>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    button: {
-        width: 150,
-        marginTop: 20,
-        height: 40,
-        borderRadius: 6,
-        alignItems: 'center',
-        backgroundColor: white,
-        color: red,
-        borderBottomColor: purple,
-        borderBottomWidth: 2,
-        justifyContent: 'center',
-    },
-    root: {
-        flex: 1,
-        textAlign: 'center',
-        justifyContent: 'center',
-    },
-    header: {
-        fontSize: 36,
-        fontWeight: 'bold',
-        color: red,
-        marginBottom: 50,
-        textAlign: 'center'
-    },
-    subHead: {
-        fontSize: 24,
-        marginBottom: 25,
-        textAlign: 'center'
-    },
-    textbox: {
-        borderColor: 'black',
-        borderWidth: 1,
-        margin: 5,
-        paddingLeft: 5
-    },
-    submit: {
-        fontSize: 20,
-        color: 'white'
-    }
-})
 
+  root: {
+    flex: 1,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  header: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: red,
+    marginBottom: 50,
+    textAlign: "center",
+  },
+  botm: {
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "gray",
+    backgroundColor: "#fff",
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 5,
+    fontSize: 20,
+    height: 40,
+  },
+  subHead: {
+    fontSize: 24,
+    marginBottom: 25,
+    textAlign: "center",
+  },
+ 
+});
 
-export default AddDeck
+export default connect(null, { addDeck })(AddDeck);

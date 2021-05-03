@@ -37,11 +37,6 @@ function formatDeckResults(results) {
 
 export function getDecksOld() {
   return AsyncStorage.getItem(decks).then(formatDeckResults);
-  // return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(result => {
-  //   console.log('raw result', result);
-  //   console.log('parse result', JSON.parse(result));
-  //   return formatDeckResults(result);
-  // });
 }
 
 
@@ -58,10 +53,10 @@ export async function getDecks() {
 }
 
 
-export async function saveDeckTitleAS(title) {
+export async function saveDeck(title) {
   try {
     await AsyncStorage.mergeItem(
-      data,
+      decks,
       JSON.stringify({
         [title]: {
           title,
@@ -75,7 +70,6 @@ export async function saveDeckTitleAS(title) {
 }
 
 export async function removeThatDeck(key) {
-  console.log(key)
   try {
     const results = await AsyncStorage.getItem(decks);
     const data = JSON.parse(results);
@@ -95,7 +89,7 @@ export async function addCard(title, card) {
       decks,
       JSON.stringify({
         [title]: {
-          questions: [...JSON.parse(deck).questions].concat(card)
+          questions:JSON.parse(deck) !== undefined && JSON.parse(deck)!== null? [...JSON.parse(deck).questions].concat(card):[]
         }
       })
     );

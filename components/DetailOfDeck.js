@@ -3,23 +3,20 @@ import { View, Text, StyleSheet } from "react-native";
 import { gray, white, red } from "../utils/colors";
 import { connect } from "react-redux";
 import TextButton from "./TextButton";
-import {removeThatDeck} from '../utils/DATA'
+import {removeThatDeck} from '../utils/DATA';
 import { removeDeck } from "../actions/index";
+
+
 export class DetailOfDeck extends Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.deck !== undefined;
-  }
+  
   handleDelete = (id) => {
     const { removeDeck, navigation } = this.props;
-
      removeDeck(id);
      removeThatDeck(id);
-
     navigation.goBack();
   };
   render() {
     const { deck } = this.props;
-    console.log(deck);
     return (
       <View style={styles.container}>
         <View>
