@@ -35,7 +35,7 @@ class Quiz extends Component {
     const { currentQuestion } = this.state;
     const questLength = deck.questions.length;
     const { question, answer } =
-      questLength !== undefined && questLength > 0 && (currentQuestion < questLength)
+      questLength !== undefined && questLength > 0 && (currentQuestion <= questLength)
         ? deck.questions[currentQuestion]
         : { question: null, answer: null };
     console.log(question, answer);

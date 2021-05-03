@@ -40,7 +40,7 @@ class AddDeck extends Component {
               style={styles.input}
               value={this.state.name}
               onChangeText={this.handleNameChange}
-              placeholder="Question"
+              placeholder="name the dack"
             />
           </View>
           <View
