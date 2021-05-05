@@ -13,13 +13,13 @@ import TextButton from "./TextButton";
 class Quiz extends Component {
   state = {
     currentQuestion: 0,
-    correctCount: 0,
+    correctAnswers: 0,
     faceUp: true,
   };
 
   handleCorrect = () => {
     this.setState((prevState) => ({
-      correctCount: ++prevState.correctCount,
+      correctAnswers: ++prevState.correctAnswers,
       currentQuestion: ++prevState.currentQuestion,
     }));
   };
@@ -64,8 +64,8 @@ class Quiz extends Component {
         </View>
         <View style={styles.root}>
         <Text>
-          {`Quiz Results ${(
-            (this.state.correctCount / questLength) *
+          {`results of quiz ${(
+            (this.state.correctAnswers / questLength) *
             100
           ).toFixed(2)}%`}
         </Text> 

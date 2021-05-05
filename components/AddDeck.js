@@ -40,7 +40,7 @@ class AddDeck extends Component {
               style={styles.input}
               value={this.state.name}
               onChangeText={this.handleNameChange}
-              placeholder="name the dack"
+              placeholder="name the deck"
             />
           </View>
           <View
@@ -49,7 +49,7 @@ class AddDeck extends Component {
             }}
           >
             <TextButton style={[styles.btn]} onPress={this.handleSubmit}>
-              Add Card
+              Add Deck
             </TextButton>
           </View>
         </ScrollView>
@@ -60,11 +60,6 @@ class AddDeck extends Component {
 
 const styles = StyleSheet.create({
 
-  root: {
-    flex: 1,
-    textAlign: "center",
-    justifyContent: "center",
-  },
   header: {
     fontSize: 36,
     fontWeight: "bold",
@@ -86,8 +81,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
   subHead: {
-    fontSize: 24,
-    marginBottom: 25,
+    fontSize: 20,
+    marginBottom: 24,
     textAlign: "center",
   },
  

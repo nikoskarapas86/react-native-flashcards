@@ -20,7 +20,7 @@ export class DetailOfDeck extends Component {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.txt}>{deck.title}</Text>
+          <Text style={styles.fnt}>{deck.title}</Text>
         </View>
         <View>
           <Text style={styles.card}>{deck.questions.length} cards</Text>
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
   },
-  txt: {
-    fontSize: 28,
+  fnt: {
+    fontSize: 29,
   },
   btn: {
     width: 100,

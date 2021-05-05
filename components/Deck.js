@@ -9,12 +9,12 @@ const Deck = props => {
 
  
   return (
-    <View style={styles.deckContainer}>
+    <View style={styles.container}>
       <View>
         <Text style={styles.deckText}>{deck.title}</Text>
       </View>
       <View>
-        <Text style={styles.cardText}>{deck.questions.length} cards</Text>
+        <Text style={styles.text}>{deck.questions.length} cards</Text>
       </View>
     </View>
   );
@@ -22,22 +22,22 @@ const Deck = props => {
 
 
 const styles = StyleSheet.create({
-  deckContainer: {
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
     flexBasis: 120,
     minHeight: 120,
     borderWidth: 1,
-    borderColor: '#aaa',
+    borderColor:gray,
     backgroundColor: white,
-    borderRadius: 5,
+    borderRadius: 6,
     marginBottom: 10
   },
   deckText: {
     fontSize: 28
   },
-  cardText: {
-    fontSize: 18,
+  text: {
+    fontSize: 16,
     color: gray
   }
 });

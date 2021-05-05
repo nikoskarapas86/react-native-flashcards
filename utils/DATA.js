@@ -27,19 +27,6 @@ const decks = {
 };
 
 
-export function getData() {
-  return decks;
-}
-
-function formatDeckResults(results) {
-  return results === null ? decks : JSON.parse(results);
-}
-
-export function getDecksOld() {
-  return AsyncStorage.getItem(decks).then(formatDeckResults);
-}
-
-
 export async function getDecks() {
   try {
     const results = await AsyncStorage.getItem(decks);
@@ -73,7 +60,6 @@ export async function removeThatDeck(key) {
   try {
     const results = await AsyncStorage.getItem(decks);
     const data = JSON.parse(results);
-    data[key] = undefined;
     delete data[key];
     AsyncStorage.setItem(data, JSON.stringify(data));
   } catch (err) {
@@ -98,13 +84,6 @@ export async function addCard(title, card) {
   }
 }
 
-export async function resetDecks() {
-  try {
-    await AsyncStorage.setItem(data, JSON.stringify(decks));
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 
 export function getDeck(id) {

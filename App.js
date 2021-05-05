@@ -56,10 +56,8 @@ export default class App extends React.Component {
           }
         },
         Quiz:{
-          screen: Quiz,
-          navigationOptions: {
-            title: 'add a new card'
-          }
+          screen: Quiz
+         
         }
 
       }
@@ -78,16 +76,7 @@ export default class App extends React.Component {
       </Provider>
     );
   }
-  finishLoading = () => {
-    this.setState({ isLoadingComplete: true });
-  };
+ 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+
