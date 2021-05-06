@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const decks = {
   React: {
@@ -29,9 +29,9 @@ const decks = {
 
 export async function getDecks() {
   try {
-    const results = await AsyncStorage.getItem(decks);
+    const results = await AsyncStorage.getItem('decks');
     if (results === null) {
-      AsyncStorage.setItem(decks, JSON.stringify(decks));
+      AsyncStorage.setItem('decks', JSON.stringify(decks));
     }
     return results === null ? decks : JSON.parse(results);
   } catch (err) {
