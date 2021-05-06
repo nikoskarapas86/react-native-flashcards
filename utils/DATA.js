@@ -58,7 +58,7 @@ export async function saveDeck(title) {
 
 export async function removeThatDeck(key) {
   try {
-    const results = await AsyncStorage.getItem(decks);
+    const results = await AsyncStorage.getItem('decks');
     const data = JSON.parse(results);
     delete data[key];
     AsyncStorage.setItem(data, JSON.stringify(data));

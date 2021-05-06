@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 const Deck = props => {
   const { deck } = props;
-
+const lth =deck && deck.questions && deck.questions.length>0?  deck.questions.length:0;
  
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ const Deck = props => {
         <Text style={styles.deckText}>{deck.title}</Text>
       </View>
       <View>
-        <Text style={styles.text}>{deck.questions.length} cards</Text>
+        <Text style={styles.text}>{lth} cards</Text>
       </View>
     </View>
   );
