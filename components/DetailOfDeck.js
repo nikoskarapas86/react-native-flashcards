@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { gray, white, red } from "../utils/colors";
 import { connect } from "react-redux";
 import TextButton from "./TextButton";
-import {removeThatDeck} from '../utils/DATA';
+import {createNotification,clearNotification, removeThatDeck} from '../utils/DATA';
 import { removeDeck } from "../actions/index";
 
 
@@ -34,8 +34,11 @@ export class DetailOfDeck extends Component {
             Add Card
           </TextButton>
           <TextButton  style={[styles.btn]}
-            onPress={() =>
+            onPress={() =>{
+              clearNotification().then(createNotification);
               this.props.navigation.navigate("Quiz", { dec: deck })
+            }
+              
             }
           >
             Start Quiz

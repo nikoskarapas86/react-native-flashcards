@@ -14,10 +14,14 @@ import DetailOfDeck from './components/DetailOfDeck';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
 import thunk from 'redux-thunk';
+import {createNotification} from "./utils/DATA";
 const store = createStore(reducer, applyMiddleware(thunk,logger));
 
 export default class App extends React.Component {
  
+  componentDidMount() {
+    createNotification();
+}
 
   
 

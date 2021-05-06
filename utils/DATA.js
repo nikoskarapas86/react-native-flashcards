@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
 const decks = {
   React: {
     title: "React",
@@ -25,6 +26,43 @@ const decks = {
     ],
   },
 };
+
+
+export function createNotification() {
+  AsyncStorage.getItem('notification')
+      .then(JSON.parse)
+      .then(data => {
+          if (data === null) {
+            
+              Permissions.askAsync(Permissions.NOTIFICATIONS)
+                  .then(({status}) => {
+                      if (status === 'granted') {
+                          Notifications.cancelAllScheduledNotificationsAsync();
+
+                          Notifications.scheduleNotificationAsync({
+                            content: 'A whole day pass without having a quiz' ,
+                            trigger: {
+                               
+                                 hour: 23,
+                                 minute: 1,
+                                repeats: true,
+                                
+                            }, 
+                          }
+                        
+                          );
+                          AsyncStorage.setItem('notification', JSON.stringify(true));
+                      }
+                  });
+          }
+      })
+}
+
+export function clearNotification() {
+  return AsyncStorage.removeItem('notification')
+      .then(Notifications.cancelAllScheduledNotificationsAsync)
+}
+
 
 
 export async function getDecks() {
